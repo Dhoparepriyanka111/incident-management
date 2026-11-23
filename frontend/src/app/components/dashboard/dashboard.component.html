@@ -1,1 +1,155 @@
-<p>dashboard works!</p>
+
+<div class="dashboard-container">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      <div class="logo-icon">IT</div>
+      <span>IncidentHub</span>
+    </div>
+
+    <p class="menu-heading">MAIN MENU</p>
+
+    <nav class="sidebar-menu">
+      <button class="menu-item active">
+        <span>▦</span>
+        Dashboard
+      </button>
+
+      <button class="menu-item">
+        <span>▤</span>
+        All Incidents
+      </button>
+
+      <button class="menu-item">
+        <span>＋</span>
+        Create Incident
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="profile-avatar">P</div>
+      <div>
+        <strong>Priyanka</strong>
+        <small>Administrator</small>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Header -->
+    <header class="top-header">
+      <div>
+        <h1>Dashboard</h1>
+        <p>Welcome back! Here's your incident overview.</p>
+      </div>
+
+      <div class="header-right">
+        <span class="today-date">23 November 2026</span>
+        <div class="header-avatar">P</div>
+      </div>
+    </header>
+
+    <!-- Summary Cards -->
+    <section class="summary-section">
+
+      <div class="summary-card">
+        <div class="card-icon blue">▤</div>
+        <p>Total Incidents</p>
+        <h2>{{ totalIncidents }}</h2>
+        <small>All reported incidents</small>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-icon orange">◷</div>
+        <p>New Incidents</p>
+        <h2>{{ newIncidents }}</h2>
+        <small>Waiting for action</small>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-icon purple">↻</div>
+        <p>In Progress</p>
+        <h2>{{ inProgressIncidents }}</h2>
+        <small>Currently being handled</small>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-icon green">✓</div>
+        <p>Resolved</p>
+        <h2>{{ resolvedIncidents }}</h2>
+        <small>Successfully completed</small>
+      </div>
+
+    </section>
+
+    <!-- Recent Incidents -->
+    <section class="incidents-section">
+
+      <div class="section-header">
+        <div>
+          <h2>Recent Incidents</h2>
+          <p>Overview of recently reported incidents</p>
+        </div>
+
+        <button class="view-button">View All</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Incident Title</th>
+              <th>Category</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Assigned To</th>
+              <th>Created Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (incident of incidents; track incident.id) {
+              <tr>
+                <td>#{{ incident.id }}</td>
+                <td class="incident-title">{{ incident.title }}</td>
+                <td>{{ incident.category }}</td>
+
+                <td>
+                  <span class="priority"
+                    [class.high]="incident.priority === 'HIGH'"
+                    [class.medium]="incident.priority === 'MEDIUM'"
+                    [class.low]="incident.priority === 'LOW'">
+                    {{ incident.priority }}
+                  </span>
+                </td>
+
+                <td>
+                  <span class="status"
+                    [class.new-status]="incident.status === 'NEW'"
+                    [class.progress-status]="incident.status === 'IN_PROGRESS'"
+                    [class.resolved-status]="incident.status === 'RESOLVED'">
+                    {{ incident.status.replace('_', ' ') }}
+                  </span>
+                </td>
+
+                <td>{{ incident.assignedTo }}</td>
+                <td>{{ incident.createdAt }}</td>
+              </tr>
+            }
+          </tbody>
+
+        </table>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
