@@ -1,0 +1,130 @@
+
+<div class="incidents-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h2>All Incidents</h2>
+      <p>Manage and track all reported IT incidents</p>
+    </div>
+  </div>
+
+  <!-- Search and Filters -->
+  <div class="filter-section">
+
+    <div class="search-box">
+      <input
+        type="text"
+        placeholder="Search incidents by title..."
+        [(ngModel)]="searchText"
+        (input)="filterIncidents()"
+      />
+    </div>
+
+    <select
+      [(ngModel)]="selectedStatus"
+      (change)="filterIncidents()"
+    >
+      <option value="">All Status</option>
+      <option value="NEW">New</option>
+      <option value="IN_PROGRESS">In Progress</option>
+      <option value="RESOLVED">Resolved</option>
+    </select>
+
+    <select
+      [(ngModel)]="selectedPriority"
+      (change)="filterIncidents()"
+    >
+      <option value="">All Priority</option>
+      <option value="HIGH">High</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="LOW">Low</option>
+    </select>
+
+    <button class="clear-btn" (click)="clearFilters()">
+      Clear Filters
+    </button>
+
+  </div>
+
+  <!-- Loading -->
+  <div class="message" *ngIf="isLoading">
+    Loading incidents...
+  </div>
+
+  <!-- Error -->
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Incidents Table -->
+  <div class="table-container" *ngIf="!isLoading && !errorMessage">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Incident Title</th>
+          <th>Category</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Assigned To</th>
+          <th>Created Date</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let incident of filteredIncidents">
+
+          <td>#{{ incident.id }}</td>
+
+          <td class="incident-title">
+            {{ incident.title }}
+          </td>
+
+          <td>{{ incident.category }}</td>
+
+          <td>
+            <span
+              class="priority-badge"
+              [ngClass]="incident.priority.toLowerCase()"
+            >
+              {{ incident.priority }}
+            </span>
+          </td>
+
+          <td>
+            <span
+              class="status-badge"
+              [ngClass]="incident.status.toLowerCase()"
+            >
+              {{ incident.status.replace('_', ' ') }}
+            </span>
+          </td>
+
+          <td>{{ incident.assignedTo || 'Not Assigned' }}</td>
+
+          <td>{{ incident.createdAt | date:'dd MMM yyyy' }}</td>
+
+        </tr>
+
+        <tr *ngIf="filteredIncidents.length === 0">
+          <td colspan="7" class="no-data">
+            No incidents found.
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- Total Records -->
+  <div class="record-count" *ngIf="!isLoading && !errorMessage">
+    Showing {{ filteredIncidents.length }} of {{ incidents.length }} incidents
+  </div>
+
+</div>

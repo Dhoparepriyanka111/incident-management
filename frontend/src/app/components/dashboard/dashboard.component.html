@@ -3,30 +3,37 @@
 
   <!-- Sidebar -->
   <aside class="sidebar">
-
     <div class="logo">
       <div class="logo-icon">IT</div>
       <span>IncidentHub</span>
     </div>
 
     <p class="menu-heading">MAIN MENU</p>
+<nav class="sidebar-menu">
 
-    <nav class="sidebar-menu">
-      <button class="menu-item active">
-        <span>▦</span>
-        Dashboard
-      </button>
+  <button
+    class="menu-item"
+    routerLink="/"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
+    <span>▦</span>
+    Dashboard
+  </button>
 
-      <button class="menu-item">
-        <span>▤</span>
-        All Incidents
-      </button>
+  <button
+    class="menu-item"
+    routerLink="/incidents"
+    routerLinkActive="active">
+    <span>▤</span>
+    All Incidents
+  </button>
 
-      <button class="menu-item">
-        <span>＋</span>
-        Create Incident
-      </button>
-    </nav>
+  <button class="menu-item">
+    <span>＋</span>
+    Create Incident
+  </button>
+
+</nav>
 
     <div class="sidebar-footer">
       <div class="profile-avatar">P</div>
@@ -35,7 +42,6 @@
         <small>Administrator</small>
       </div>
     </div>
-
   </aside>
 
   <!-- Main Content -->
@@ -87,6 +93,32 @@
 
     </section>
 
+    <!-- Priority Overview -->
+    <section class="summary-section priority-section">
+
+      <div class="summary-card">
+        <div class="card-icon orange">!</div>
+        <p>High Priority</p>
+        <h2>{{ highPriorityIncidents }}</h2>
+        <small>Critical attention required</small>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-icon purple">●</div>
+        <p>Medium Priority</p>
+        <h2>{{ mediumPriorityIncidents }}</h2>
+        <small>Needs attention</small>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-icon green">↓</div>
+        <p>Low Priority</p>
+        <h2>{{ lowPriorityIncidents }}</h2>
+        <small>Normal attention</small>
+      </div>
+
+    </section>
+
     <!-- Recent Incidents -->
     <section class="incidents-section">
 
@@ -95,13 +127,11 @@
           <h2>Recent Incidents</h2>
           <p>Overview of recently reported incidents</p>
         </div>
-
-        <button class="view-button">View All</button>
+<button class="view-button" routerLink="/incidents">View All</button>
       </div>
 
       <div class="table-wrapper">
         <table>
-
           <thead>
             <tr>
               <th>ID</th>
@@ -144,12 +174,10 @@
               </tr>
             }
           </tbody>
-
         </table>
       </div>
 
     </section>
 
   </main>
-
 </div>
