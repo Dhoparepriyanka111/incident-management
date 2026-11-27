@@ -23,6 +23,12 @@ export class IncidentService {
     return this.http.get<Incident[]>(this.apiUrl);
   }
 
+
+  // Create new incident
+  createIncident(incident: Partial<Incident>): Observable<Incident> {
+    return this.http.post<Incident>(this.apiUrl, incident);
+  }
+
   // Get dashboard summary
   getDashboardSummary(): Observable<DashboardSummary> {
     return this.http.get<DashboardSummary>(this.dashboardUrl);
