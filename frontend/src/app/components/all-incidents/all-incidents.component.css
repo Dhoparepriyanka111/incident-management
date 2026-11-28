@@ -197,4 +197,25 @@ tr:hover td {
   .page-header {
     align-items: flex-start;
   }
+  .incident-title-link {
+  color: #3975f6;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.incident-title-link:hover {
+  text-decoration: underline;
+}
+/* Clickable Incident Title */
+.incident-title-link {
+  color: #3975f6;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.incident-title-link:hover {
+  text-decoration: underline;
+}
 }

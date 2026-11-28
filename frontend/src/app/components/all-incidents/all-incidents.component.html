@@ -81,8 +81,12 @@
           <td>#{{ incident.id }}</td>
 
           <td class="incident-title">
-            {{ incident.title }}
-          </td>
+  <a
+    [routerLink]="['/incidents', incident.id]"
+    class="incident-title-link">
+    {{ incident.title }}
+  </a>
+</td>
 
           <td>{{ incident.category }}</td>
 

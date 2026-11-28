@@ -33,4 +33,10 @@ export class IncidentService {
   getDashboardSummary(): Observable<DashboardSummary> {
     return this.http.get<DashboardSummary>(this.dashboardUrl);
   }
+
+  // Get incident by ID
+  getIncidentById(id: number): Observable<Incident> {
+    return this.http.get<Incident>(`${this.apiUrl}/${id}`);
+  }
+
 }

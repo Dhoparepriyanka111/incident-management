@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 
 import { IncidentService } from '../../services/incident.service';
 import { Incident } from '../../models/incident.model';
+import { RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-all-incidents',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+ imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './all-incidents.component.html',
   styleUrl: './all-incidents.component.css'
 })
