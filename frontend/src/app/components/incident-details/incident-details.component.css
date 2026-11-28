@@ -206,4 +206,19 @@
     grid-template-columns: 1fr;
     gap: 18px;
   }
+  /* Edit Incident Button */
+.edit-btn {
+  background: #3975f6;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background: #245edb;
+}
 }

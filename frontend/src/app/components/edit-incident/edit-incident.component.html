@@ -1,0 +1,197 @@
+
+<div class="edit-incident-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h2>Edit Incident</h2>
+    <p>Update incident information and track its progress.</p>
+  </div>
+
+  <!-- Loading Message -->
+  @if (isLoading) {
+    <div class="message">Loading incident details...</div>
+  }
+
+  <!-- Error Message -->
+  @if (errorMessage) {
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- Edit Form -->
+  @if (!isLoading && !errorMessage) {
+
+    <div class="form-card">
+
+      <form [formGroup]="incidentForm" (ngSubmit)="onSubmit()">
+
+        <!-- Success Message -->
+        @if (successMessage) {
+          <div class="success-message">
+            {{ successMessage }}
+          </div>
+        }
+
+        <h3>Incident Information</h3>
+
+        <!-- Incident Title -->
+        <div class="form-group">
+          <label>Incident Title <span>*</span></label>
+
+          <input
+            type="text"
+            formControlName="title"
+            placeholder="Enter incident title">
+
+          @if (incidentForm.get('title')?.touched &&
+               incidentForm.get('title')?.hasError('required')) {
+            <small class="error-text">
+              Incident title is required.
+            </small>
+          }
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label>Description <span>*</span></label>
+
+          <textarea
+            rows="4"
+            formControlName="description"
+            placeholder="Describe the issue">
+          </textarea>
+
+          @if (incidentForm.get('description')?.touched &&
+               incidentForm.get('description')?.hasError('required')) {
+            <small class="error-text">
+              Description is required.
+            </small>
+          }
+        </div>
+
+        <!-- Category and Priority -->
+        <div class="form-row">
+
+          <div class="form-group">
+            <label>Category <span>*</span></label>
+
+            <select formControlName="category">
+              <option value="">Select Category</option>
+              <option value="Application">Application</option>
+              <option value="Network">Network</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Database">Database</option>
+            </select>
+
+            @if (incidentForm.get('category')?.touched &&
+                 incidentForm.get('category')?.hasError('required')) {
+              <small class="error-text">
+                Please select a category.
+              </small>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Priority <span>*</span></label>
+
+            <select formControlName="priority">
+              <option value="HIGH">High</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="LOW">Low</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+          <label>Incident Status <span>*</span></label>
+
+          <select formControlName="status">
+            <option value="NEW">New</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="RESOLVED">Resolved</option>
+          </select>
+        </div>
+
+        <h3 class="section-title">Reporter Information</h3>
+
+        <!-- Reporter Name and Email -->
+        <div class="form-row">
+
+          <div class="form-group">
+            <label>Reporter Name <span>*</span></label>
+
+            <input
+              type="text"
+              formControlName="reporterName"
+              placeholder="Enter reporter name">
+
+            @if (incidentForm.get('reporterName')?.touched &&
+                 incidentForm.get('reporterName')?.hasError('required')) {
+              <small class="error-text">
+                Reporter name is required.
+              </small>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Reporter Email <span>*</span></label>
+
+            <input
+              type="email"
+              formControlName="reporterEmail"
+              placeholder="Enter reporter email">
+
+            @if (incidentForm.get('reporterEmail')?.touched &&
+                 incidentForm.get('reporterEmail')?.hasError('required')) {
+              <small class="error-text">
+                Email is required.
+              </small>
+            }
+
+            @if (incidentForm.get('reporterEmail')?.touched &&
+                 incidentForm.get('reporterEmail')?.hasError('email')) {
+              <small class="error-text">
+                Enter a valid email address.
+              </small>
+            }
+          </div>
+
+        </div>
+
+        <!-- Assigned Team -->
+        <div class="form-group">
+          <label>Assigned Team</label>
+
+          <select formControlName="assignedTo">
+            <option value="">Not Assigned</option>
+            <option value="Support Team">Support Team</option>
+            <option value="Development Team">Development Team</option>
+            <option value="Network Team">Network Team</option>
+            <option value="Hardware Team">Hardware Team</option>
+          </select>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            class="submit-btn"
+            [disabled]="isSubmitting">
+
+            {{ isSubmitting ? 'Updating...' : 'Update Incident' }}
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  }
+
+</div>

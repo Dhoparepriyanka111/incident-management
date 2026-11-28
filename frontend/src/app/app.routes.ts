@@ -3,28 +3,32 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AllIncidentsComponent } from './components/all-incidents/all-incidents.component';
 import { CreateIncidentComponent } from './components/create-incident/create-incident.component';
 import { IncidentDetailsComponent } from './components/incident-details/incident-details.component';
+import { EditIncidentComponent } from './components/edit-incident/edit-incident.component';
 
 export const routes: Routes = [
-     {
+  {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
   },
-
 
   {
     path: 'incidents/:id',
-    component: IncidentDetailsComponent
+    component: IncidentDetailsComponent,
   },
   {
     path: 'incidents',
-    component: AllIncidentsComponent
+    component: AllIncidentsComponent,
   },
   {
     path: 'create-incident',
-    component: CreateIncidentComponent
+    component: CreateIncidentComponent,
+  },
+  {
+    path: 'incidents/:id/edit',
+    component: EditIncidentComponent,
   },
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];

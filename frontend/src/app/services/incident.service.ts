@@ -38,5 +38,14 @@ export class IncidentService {
   getIncidentById(id: number): Observable<Incident> {
     return this.http.get<Incident>(`${this.apiUrl}/${id}`);
   }
-
+// Update existing incident
+updateIncident(
+  id: number,
+  incident: Partial<Incident>
+): Observable<Incident> {
+  return this.http.put<Incident>(
+    `${this.apiUrl}/${id}`,
+    incident
+  );
+}
 }

@@ -1,6 +1,4 @@
-
 <div class="details-container">
-
   <!-- Page Header -->
   <div class="page-header">
     <div>
@@ -8,18 +6,13 @@
       <p>View complete information about the reported incident.</p>
     </div>
 
-  <button
-  type="button"
-  class="back-btn"
-  routerLink="/incidents">
-  ← Back to All Incidents
-</button>
+    <button type="button" class="back-btn" routerLink="/incidents">
+      ← Back to All Incidents
+    </button>
   </div>
 
   <!-- Loading Message -->
-  <div class="message" *ngIf="isLoading">
-    Loading incident details...
-  </div>
+  <div class="message" *ngIf="isLoading">Loading incident details...</div>
 
   <!-- Error Message -->
   <div class="error-message" *ngIf="errorMessage">
@@ -28,7 +21,6 @@
 
   <!-- Incident Information -->
   <div class="details-card" *ngIf="incident as item">
-
     <!-- Incident Header -->
     <div class="card-header">
       <div>
@@ -37,21 +29,20 @@
       </div>
 
       <div class="badges">
-        <span
-          class="priority-badge"
-          [ngClass]="item.priority.toLowerCase()">
+        <span class="priority-badge" [ngClass]="item.priority.toLowerCase()">
           {{ item.priority }}
         </span>
 
-        <span
-          class="status-badge"
-          [ngClass]="item.status.toLowerCase()">
-          {{ item.status.replace('_', ' ') }}
+        <span class="status-badge" [ngClass]="item.status.toLowerCase()">
+          {{ item.status.replace("_", " ") }}
         </span>
       </div>
+      <a [routerLink]="['/incidents', item.id, 'edit']" class="edit-btn">
+        Edit Incident
+      </a>
     </div>
 
-    <hr>
+    <hr />
 
     <!-- Description -->
     <div class="detail-section">
@@ -59,14 +50,13 @@
       <p>{{ item.description }}</p>
     </div>
 
-    <hr>
+    <hr />
 
     <!-- Incident Information -->
     <div class="detail-section">
       <h4>Incident Information</h4>
 
       <div class="details-grid">
-
         <div class="detail-item">
           <label>Incident ID</label>
           <p>#{{ item.id }}</p>
@@ -84,35 +74,39 @@
 
         <div class="detail-item">
           <label>Status</label>
-          <p>{{ item.status.replace('_', ' ') }}</p>
+          <p>{{ item.status.replace("_", " ") }}</p>
         </div>
 
         <div class="detail-item">
           <label>Assigned Team</label>
-          <p>{{ item.assignedTo || 'Not Assigned' }}</p>
+          <p>{{ item.assignedTo || "Not Assigned" }}</p>
         </div>
 
         <div class="detail-item">
           <label>Created Date</label>
-          <p>{{ item.createdAt | date:'dd MMM yyyy' }}</p>
+          <p>{{ item.createdAt | date: "dd MMM yyyy" }}</p>
         </div>
 
         <div class="detail-item">
           <label>Last Updated</label>
-          <p>{{ item.updatedAt ? (item.updatedAt | date:'dd MMM yyyy') : 'Not Updated' }}</p>
+          <p>
+            {{
+              item.updatedAt
+                ? (item.updatedAt | date: "dd MMM yyyy")
+                : "Not Updated"
+            }}
+          </p>
         </div>
-
       </div>
     </div>
 
-    <hr>
+    <hr />
 
     <!-- Reporter Information -->
     <div class="detail-section">
       <h4>Reporter Information</h4>
 
       <div class="details-grid">
-
         <div class="detail-item">
           <label>Reporter Name</label>
           <p>{{ item.reporterName }}</p>
@@ -122,10 +116,7 @@
           <label>Reporter Email</label>
           <p>{{ item.reporterEmail }}</p>
         </div>
-
       </div>
     </div>
-
   </div>
-
 </div>
